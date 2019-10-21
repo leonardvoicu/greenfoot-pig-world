@@ -4,16 +4,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Leonard VOICU
  * @version 1.0.0
  */
-public class PigCharacter extends Actor
+public class Kangoo extends Actor
 {
     private final int GRAVITY = 1;
     private final int STEP = 3;
     private int velocity;
     private final int DISTANCE_WALL = 20;
+    private int counterPizza = 0;
+    private Score myScore;
     
-    public PigCharacter() {
+    public Kangoo() {
         velocity = 0;
     }
+    
+    public Kangoo(Score score) {
+        myScore = score;
+        velocity = 0;
+    }
+    
     
     public void act() 
     {
@@ -57,7 +65,54 @@ public class PigCharacter extends Actor
         if(Greenfoot.isKeyDown("A") && canMoveRight()){
             x-=STEP;
         }
+        
+        meetingPizza();
+        finishSecondWorld();
         setLocation(x, y);
+    }
+    
+    public void finishSecondWorld() {
+        meetingSnakey();
+        meetingButterfly();
+    }
+    
+    public void meetingSnakey() {
+        int imageWidth = getImage().getWidth();
+        int imageHeight  = getImage().getHeight();
+        Actor snakey = getOneIntersectingObject(Snakey.class);
+        if(snakey != null){
+            this.gameOver();
+        }
+    }
+    
+    
+    public void meetingButterfly() {
+        int imageWidth = getImage().getWidth();
+        int imageHeight  = getImage().getHeight();
+        Actor butterfly = getOneIntersectingObject(Butterfly.class);
+        if(butterfly != null){
+            this.gameOver();
+        }
+    }
+    
+    public void gameOver() {
+        World _world = getWorld();
+        //_world.removeObject(this);
+    }
+    
+    public void meetingPizza() {
+        int imageWidth = getImage().getWidth();
+        int imageHeight  = getImage().getHeight();
+        Actor pizza = getOneIntersectingObject(Pizza.class);
+        if(pizza != null){
+                World w = getWorld();
+                meetPizza();
+                w.removeObject(pizza);
+        }
+        if(counterPizza == 3) {
+            SecondWorld _world_ = new SecondWorld();
+            Greenfoot.setWorld(_world_);
+        }
     }
     
     public boolean isOnPlatform() {
@@ -115,5 +170,10 @@ public class PigCharacter extends Actor
             canMoveRight = false;
         }
         return canMoveRight;
+    }
+    
+    public void meetPizza() {
+        counterPizza++;
+        myScore.setText(counterPizza);
     }
 }
