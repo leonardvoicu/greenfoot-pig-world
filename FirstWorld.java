@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * @author Leonard VOICU
@@ -51,8 +51,6 @@ public class FirstWorld extends World
         pizza2.setLocation(139,354);
         pizza3.setLocation(214,368);
         pizza.setLocation(346,370);
-        score.setLocation(553,25);
-        score.setLocation(560,22);
-        score.setLocation(506,25);
+     
     }
 }

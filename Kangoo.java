@@ -66,9 +66,9 @@ public class Kangoo extends Actor
             x-=STEP;
         }
         
+        setLocation(x, y);
         meetingPizza();
         finishSecondWorld();
-        setLocation(x, y);
     }
     
     public void finishSecondWorld() {
